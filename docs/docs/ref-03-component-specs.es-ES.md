@@ -1,5 +1,5 @@
 ---
-id: component-specs
+id: component-specs-es-ES
 title: Especificación de componentes y ciclo de vida
 permalink: component-specs-es-ES.html
 prev: component-api-es-ES.html
@@ -200,7 +200,7 @@ Es invocado inmediatamente despues de que las actualizaciones del componente son
 Usa esto como una oportunidad para realizar operaciones en el DOM luego de que el componente ha sido actualizado.
 
 
-### Demontar: componentWillUnmount
+### Desmontar: componentWillUnmount
 
 ```javascript
 void componentWillUnmount()
