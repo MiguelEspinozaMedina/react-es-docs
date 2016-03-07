@@ -1,24 +1,25 @@
 ---
-id: addons
-title: Add-ons
-permalink: addons.html
-prev: tooling-integration.html
-next: animation.html
+id: addons-es-ES
+title: Complementos
+permalink: addons-es-ES.html
+prev: tooling-integration-es-ES.html
+next: animation-es-ES.html
 ---
 
-The React add-ons are a collection of useful utility modules for building React apps. **These should be considered experimental** and tend to change more often than the core.
+Los Complementos de React son una colección de módulos de servicios útilies para la construcción de aplicaciones con React. **Esto debe de ser considerado experimental** y tiende a cambiar más a menudo que el núcleo.
 
-- [`TransitionGroup` and `CSSTransitionGroup`](animation.html), for dealing with animations and transitions that are usually not simple to implement, such as before a component's removal.
-- [`LinkedStateMixin`](two-way-binding-helpers.html), to simplify the coordination between user's form input data and the component's state.
-- [`cloneWithProps`](clone-with-props.html), to make shallow copies of React components and change their props.
-- [`createFragment`](create-fragment.html), to create a set of externally-keyed children.
-- [`update`](update.html), a helper function that makes dealing with immutable data in JavaScript easier.
-- [`PureRenderMixin`](pure-render-mixin.html), a performance booster under certain situations.
-- [`shallowCompare`](shallow-compare.html), a helper function that performs a shallow comparison for props and state in a component to decide if a component should update.
+- [`TransitionGroup` and `CSSTransitionGroup`](animation-es-ES.html), para hacer frente a las animaciones y transiciones que son por lo general son complejas de implementar, por ejemplo, antes de remover un componente.
+- [`LinkedStateMixin`](two-way-binding-helpers-es-ES.html), para simplificar la coordinación entre la introducción de datos a través de formularios por parte del usuario y los estados del componente.
+- [`cloneWithProps`](clone-with-props-es-ES.html), para hacer copias de componentes de React y cambiarle sus props.
+- [`createFragment`](create-fragment-es-ES.html), para crear un conjunto de hijos acuñados externamente.
+- [`update`](update-es-ES.html), una función auxiliar que sirve para tratar datos inmutables en JavaScript de una forma sencilla.
+- [`PureRenderMixin`](pure-render-mixin-es-ES.html), un refuerzo de rendimiento para ciertas situaciones.
+- [`shallowCompare`](shallow-compare-es-ES.html), una función auxiliar que realiza una comparación para los props y el estado de un componente para decidir si un componente debe actualizarse.
 
+Los complementos de abajo estan solo en la version de desarrollo (desminificado) de React
 The add-ons below are in the development (unminified) version of React only:
 
-- [`TestUtils`](test-utils.html), simple helpers for writing test cases.
-- [`Perf`](perf.html), a performance profiling tool for finding optimization opportunities.
+- [`TestUtils`](test-utils.html), simple utilidad auxiliar para escribir casos de pruebas.
+- [`Perf`](perf.html), una herramienta de perfiles de rendimiento para encontrar oportunidades de optimización.
 
-To get the add-ons, install them individually from npm (e.g., `npm install react-addons-pure-render-mixin`). We don't support using the addons if you're not using npm.
+Para obtener los complementos, instalalos individualmente desde npm (ejm: `npm install react-addons-pure-render-mixin`). No damos soporte para el uso de los complementos si no estas usando npm.
