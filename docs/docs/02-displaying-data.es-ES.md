@@ -1,47 +1,47 @@
 ---
-id: displaying-data
-title: Displaying Data
-permalink: displaying-data.html
-prev: why-react.html
-next: jsx-in-depth.html
+id: displaying-data-es-ES
+title: Mostrando Datos
+permalink: displaying-data-es-ES.html
+prev: why-react-es-ES.html
+next: jsx-in-depth-es-ES.html
 ---
 
-The most basic thing you can do with a UI is display some data. React makes it easy to display data and automatically keeps the interface up-to-date when the data changes.
+Lo cosa más básica que puedes hacer con una UI (Interfaz de Usuario) es mostrar algún tipo de dato. React hace sencillo mostrar datos y mantener automáticamente la interfaz `actualizada` cuando los datos cambian.
 
-## Getting Started
+## Empezando
 
-Let's look at a really simple example. Create a `hello-react.html` file with the following code:
+Veamos un ejemplo muy simple. Crear un archivo `hola-react.html` con el siguiente código:
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello React</title>
+    <title>Hola React</title>
     <script src="https://fb.me/react-{{site.react_version}}.js"></script>
     <script src="https://fb.me/react-dom-{{site.react_version}}.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
   </head>
   <body>
-    <div id="example"></div>
+    <div id="ejemplo"></div>
     <script type="text/babel">
 
-      // ** Your code goes here! **
+      // ** ¡Su código va aquí! **
 
     </script>
   </body>
 </html>
 ```
 
-For the rest of the documentation, we'll just focus on the JavaScript code and assume it's inserted into a template like the one above. Replace the placeholder comment above with the following JSX:
+Para el resto de la documentación, sólo tendremos que centrarnos en el código JavaScript y asumir que es insertado en una plantilla como la de arriba. Reemplace el comentario marcado de arriba con el siguiente JSX:
 
 ```javascript
-var HelloWorld = React.createClass({
+var HolaMundo = React.createClass({
   render: function() {
     return (
       <p>
-        Hello, <input type="text" placeholder="Your name here" />!
-        It is {this.props.date.toTimeString()}
+        Hola, <input type="text" placeholder="Tu nombre aquí" />!
+        Es {this.props.date.toTimeString()}
       </p>
     );
   }
@@ -49,76 +49,82 @@ var HelloWorld = React.createClass({
 
 setInterval(function() {
   ReactDOM.render(
-    <HelloWorld date={new Date()} />,
-    document.getElementById('example')
+    <HolaMundo date={new Date()} />,
+    document.getElementById('ejemplo')
   );
 }, 500);
 ```
 
-## Reactive Updates
+## Actualizaciones Reactivas
 
-Open `hello-react.html` in a web browser and type your name into the text field. Notice that React is only changing the time string in the UI — any input you put in the text field remains, even though you haven't written any code to manage this behavior. React figures it out for you and does the right thing.
+Abrir Hola-react.html` en un navegador web y escriba su nombre en el campo de texto. Tenga en cuenta que React está cambiando solo la cadena de texto con la fecha en la UI - cualquier dato que pongas en la entrada de texto, incluso si no ha escript ningún código para gestionar este comportamiento. React lo resuelve por usted y hace lo correcto.
 
-The way we are able to figure this out is that React does not manipulate the DOM unless it needs to. **It uses a fast, internal mock DOM to perform diffs and computes the most efficient DOM mutation for you.**
+La forma en la que es capaz de resolver esto es que React no manipula el DOM a menos que lo necesite. ** Lo hace rápido, usa una maqueta interna del DOM para llevar a cabo las diferenciaciones y calcular la mutación del DOM de una forma eficiente. **
 
-The inputs to this component are called `props` — short for "properties". They're passed as attributes in JSX syntax. You should think of these as immutable within the component, that is, **never write to `this.props`**.
+Las entradas a este componente se llaman `props` - abreviatura de "propiedades". Ellos son pasados como atributos en la sintaxis JSX. Deben de pensar en ellos como inmutables dentro del componente, es decir, ** Nunca sobrescribir a `this.props` **.
 
-## Components are Just Like Functions
+## Los Componentes son Sólo Como Funciones
 
-React components are very simple. You can think of them as simple functions that take in `props` and `state` (discussed later) and render HTML. With this in mind, components are easy to reason about.
+Lo componentes de React son muy simples. Se puede pensar en ellos como funciones simples que tienen `props` y `state` (explicado más adelante) y muestran HTML. Con esto en mente, los componentes son fáciles de entender.
 
-> Note:
+> Nota:
 >
-> **One limitation**: React components can only render a single root node. If you want to return multiple nodes they *must* be wrapped in a single root.
+> **Una limitación**: Lo componentes de React solo pueden generar un único nodo raíz. Si desea devolver múltiples nodos  *debe* ser envuelto en una sola raíz.
 
-## JSX Syntax
+## Syntax de JSX
 
-We strongly believe that components are the right way to separate concerns rather than "templates" and "display logic." We think that markup and the code that generates it are intimately tied together. Additionally, display logic is often very complex and using template languages to express it becomes cumbersome.
+Creemos firmemente que los componentes son la manera correcta de separar preocupaciones en lugar de "plantillas" y "lógica de visualización." Creemos que el marcado y el código que genera que están íntimamente vinculados entre sí. Además, la lógica de visualización es a menudo muy compleja y el uso de lenguajes de plantillas para expresar se vuelve muy complicado.
 
-We've found that the best solution for this problem is to generate HTML and component trees directly from the JavaScript code such that you can use all of the expressive power of a real programming language to build UIs.
+Hemos encontrado que la mejor solución para este problema es generar HTML y arboles de componentes directamente desde el código JavaScript de tal manera que se puede utilizar toda la potencia expresiva de un lenguaje de programación real para construir interfaces de usuario.
 
-In order to make this easier, we've added a very simple, **optional** HTML-like syntax to create these React tree nodes.
+Con el fin de hacer esto más fácil, hemos añadido una muy simple, sintaxis **opcional** como HTML para crear estos arboles de nodos en React.
 
-**JSX lets you create JavaScript objects using HTML syntax.** To generate a link in React using pure JavaScript you'd write:
+**JSX te permite crear objetos de JavaScript utilizando la sintaxis HTML** Para generar un link en React usando JavaScript puro puedes escribir lo siguiente:
 
-`React.createElement('a', {href: 'https://facebook.github.io/react/'}, 'Hello!')`
+`React.createElement('a', {href: 'https://facebook.github.io/react/'}, '¡Hola!')`
 
-With JSX this becomes:
+Con JSX esto se convierte en:
 
-`<a href="https://facebook.github.io/react/">Hello!</a>`
+`<a href="https://facebook.github.io/react/">¡Hola!</a>`
 
-We've found this has made building React apps easier and designers tend to prefer the syntax, but everyone has their own workflow, so **JSX is not required to use React.**
+Hemos descubierto que esto hace que la construcción de aplicaciones en React sea más fácil y diseñadores tiendan a preferir esta sintaxis, pero cada uno tiene su propio flujo de trabajo, por lo que **JSX no está obligado a utilizarse en React.**
 
-JSX is very small. To learn more about it, see [JSX in depth](/react/docs/jsx-in-depth.html). Or see the transform in action in [the Babel REPL](https://babeljs.io/repl/).
+JSX es muy pequeño. Para obtener más información al respecto, véase [JSX en profundidad]
 
-JSX is similar to HTML, but not exactly the same. See [JSX gotchas](/react/docs/jsx-gotchas.html) for some key differences.
+JSX es muy pequeño. Para obtener más información al respecto, véase [JSX a fondo](/react/docs/jsx-in-depth-es-ES.html). O ver la transformación en acción en [Babel REPL](https://babeljs.io/repl/).
 
-[Babel exposes a number of ways to get started using JSX](http://babeljs.io/docs/setup/), ranging from command line tools to Ruby on Rails integrations. Choose the tool that works best for you.
+JSX es similar a HTML, pero no es exactamente lo mismo. Ver [trampas JSX]  para algunas diferencias clave.
 
-## React without JSX
+JSX es similar a HTML, pero no es exactamente lo mismo. Ver [aspectos críticos de JSX](/react/docs/jsx-gotchas-es-ES.html) para algunas diferencias importantes.
 
-JSX is completely optional; you don't have to use JSX with React. You can create React elements in plain JavaScript using `React.createElement`, which takes a tag name or component, a properties object, and variable number of optional child arguments.
+que van desde herramientas de línea de comandos a integraciones de Ruby on Rails. Seleccione la herramienta que funcione mejor para usted.
+
+[Babel expone una serie de maneras de comenzar a usar JSX](http://babeljs.io/docs/setup/), que van desde herramientas de línea de comandos a integraciones de Ruby on Rails. Seleccione la herramienta que mejor funcione para usted.
+
+## React sin JSX
+
+JSX es completamente opcional; usted no tiene que utilizar JSX con React. Puede crear elementos de React en JavaScript puro utilizando `React.createElement`, que toma un nombre de etiqueta o componente, un objeto de propiedades, y el número variable de argumentos secundarios opcionales.
 
 ```javascript
-var child1 = React.createElement('li', null, 'First Text Content');
-var child2 = React.createElement('li', null, 'Second Text Content');
-var root = React.createElement('ul', { className: 'my-list' }, child1, child2);
-ReactDOM.render(root, document.getElementById('example'));
+var secundario1 = React.createElement('li', null, 'First Text Content');
+var secundario2 = React.createElement('li', null, 'Second Text Content');
+var root = React.createElement('ul', { className: 'my-list' }, secundario1, secundario2);
+ReactDOM.render(root, document.getElementById('ejemplo'));
 ```
 
-For convenience, you can create short-hand factory functions to create elements from custom components.
+Para mayor comodidad, puede crear funciones cortas a mano para crear elementos de componentes personalizados.
 
 ```javascript
 var Factory = React.createFactory(ComponentClass);
 ...
 var root = Factory({ custom: 'prop' });
-ReactDOM.render(root, document.getElementById('example'));
+ReactDOM.render(root, document.getElementById('ejemplo'));
 ```
 
-React already has built-in factories for common HTML tags:
+React ya ha integrado funciones de etiquetas HTML comunes:
 
 ```javascript
-var root = React.DOM.ul({ className: 'my-list' },
-             React.DOM.li(null, 'Text Content')
+var root = React.DOM.ul({ className: 'mi-lista' },
+             React.DOM.li(null, 'Contenido del Texto')
            );
 ```
