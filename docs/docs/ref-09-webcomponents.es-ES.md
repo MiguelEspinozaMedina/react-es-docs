@@ -26,7 +26,7 @@ class HelloMessage extends React.Component{
 > they should work, but to access the imperative APIs of a web component, you will need to attach a ref to the
 > component and interact with the DOM node directly.  If you are using third-party web components, the
 > recommended solution is to write a React component that behaves as a wrapper for your web component.
-> 
+>
 > At this time, events emitted by a web component may not properly propagate through a React render tree.
 > You will need to manually attach event handlers to handle these events within your React components.
 
@@ -36,7 +36,7 @@ class HelloMessage extends React.Component{
 
 ```javascript
 var proto = Object.create(HTMLElement.prototype, {
-  createdCallback: {
+  attachedCallback: {
     value: function() {
       var mountPoint = document.createElement('span');
       this.createShadowRoot().appendChild(mountPoint);
@@ -53,4 +53,3 @@ document.registerElement('x-search', {prototype: proto});
 ## Complete Example
 
 Check out the `webcomponents` example in the [starter kit](/react/downloads.html) for a complete example.
-

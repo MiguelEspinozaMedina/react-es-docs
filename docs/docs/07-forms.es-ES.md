@@ -102,7 +102,7 @@ If you want to initialize the component with a non-empty value, you can supply a
   }
 ```
 
-This example will function much like the **Uncontrolled Components** example above.
+This example will function much like the **Controlled Components** example above.
 
 Likewise, `<input type="checkbox">` and `<input type="radio">` support `defaultChecked`, and `<select>` supports `defaultValue`.
 
@@ -166,3 +166,8 @@ To make an uncontrolled component, `defaultValue` is used instead.
 > Note:
 >
 > You can pass an array into the `value` attribute, allowing you to select multiple options in a `select` tag: `<select multiple={true} value={['B', 'C']}>`.
+
+### Imperative operations
+
+If you need to imperatively perform an operation, you have to obtain a [reference to the DOM node](/react/docs/more-about-refs.html#the-ref-callback-attribute).
+For instance, if you want to imperatively submit a form, one approach would be to attach a `ref` to the `form` element and manually call `form.submit()`.

@@ -2,7 +2,7 @@
 id: addons-es-ES
 title: Complementos
 permalink: addons-es-ES.html
-prev: tooling-integration-es-ES.html
+prev: environments-es-ES.html
 next: animation-es-ES.html
 ---
 
