@@ -20,7 +20,7 @@ Veamos un ejemplo muy simple. Crear un archivo `hola-react.html` con el siguient
     <title>Hola React</title>
     <script src="https://fb.me/react-{{site.react_version}}.js"></script>
     <script src="https://fb.me/react-dom-{{site.react_version}}.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   </head>
   <body>
     <div id="ejemplo"></div>
