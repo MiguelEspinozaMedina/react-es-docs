@@ -90,10 +90,10 @@ Piensa en todas las piezas de datos que tenemos en nuestra aplicación de ejempl
   * El valor del checkbox
   * La lista de productos filtrada
 
-Vamos a ir por cada una de ellas y averiguar cual es state. Simplemente realiza tres preguntas sobre cada pieza de datos: 
+Vamos a ir por cada una de ellas y averiguar cual es state. Simplemente realiza tres preguntas sobre cada pieza de datos:
 
   1. Es pasada desde un padre a través de props? Si es así, es probable que no sea state.
-  2. ¿Cambia en el tiempo? Si no es así, es probable que no sea state.
+  2. ¿Se mantiene sin cambios a través del tiempo? Si es así, es probable que no sea state.
   3. ¿Se puede calcular en base a cualquier otro state o props? Si es así, no es state.
 
 La lista original de productos es pasada como props, así que no es state. El texto de búsqueda y el checkbox parecen ser state ya que su valor cambia en el tiempo y no pueden ser calculados desde nada. Y finalmente, la lista de productos filtrada no es state ya que puede ser calculada mediante la combinación de la lista original con el texto de búsqueda y el valor del checkbox.
@@ -134,7 +134,7 @@ Puedes empezar a ver como se comportará la aplicación: asigna `filterText` con
 
 Hasta ahora, hemos construido una aplicación que renderiza correctamente en función de los props y state fluyendo a través de la jerarquía. Ahora es tiempo de soportar el flujo de datos de la otra manera: los componentes del formulario que se encuentran abajo en la jerarquía necesitan actualizar el state en `FilterableProductTable`.
 
-React hace que este flujo de datos sea explícito para hacer fácil de entender cómo funciona el programa, pero requiere un poco más de escritura que el tradicional enlace de dos direcciones (two-way data binding). React proporciona un complemento llamado `ReactLink` para hacer este patrón tan conveniente como el enlace de dos direcciones (two-way data binding), pero para el propósito de este artículo, vamos a mantener todo explícito.
+React hace que este flujo de datos sea explícito para hacer fácil de entender cómo funciona el programa, pero requiere un poco más de escritura que el tradicional enlace de dos direcciones (two-way data binding).
 
 Si intentas escribir o seleccionar el checkbox en la versión actual del ejemplo, verás que React ignora lo que escribes. Esto es intencional, ya que hemos asignado el prop `value` del `input` para que siempre sea igual al `state` pasado desde `FilterableProductTable`.
 
