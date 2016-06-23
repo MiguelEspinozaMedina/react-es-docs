@@ -17,7 +17,6 @@ var ReactPropTypeLocations = require('ReactPropTypeLocations');
 var ReactPropTypeLocationNames = require('ReactPropTypeLocationNames');
 var ReactNoopUpdateQueue = require('ReactNoopUpdateQueue');
 
-var assign = require('Object.assign');
 var emptyObject = require('emptyObject');
 var invariant = require('invariant');
 var keyMirror = require('keyMirror');
@@ -52,11 +51,9 @@ var SpecPolicy = keyMirror({
 });
 
 
-var injectedMixins = [];
-
 /**
  * Composite components are higher-level components that compose other composite
- * or native components.
+ * or host components.
  *
  * To create a new type of `ReactClass`, pass a specification of
  * your new class to `React.createClass`. The only requirement of your class
@@ -331,7 +328,7 @@ var RESERVED_SPEC_KEYS = {
         ReactPropTypeLocations.childContext
       );
     }
-    Constructor.childContextTypes = assign(
+    Constructor.childContextTypes = Object.assign(
       {},
       Constructor.childContextTypes,
       childContextTypes
@@ -345,7 +342,7 @@ var RESERVED_SPEC_KEYS = {
         ReactPropTypeLocations.context
       );
     }
-    Constructor.contextTypes = assign(
+    Constructor.contextTypes = Object.assign(
       {},
       Constructor.contextTypes,
       contextTypes
@@ -373,7 +370,7 @@ var RESERVED_SPEC_KEYS = {
         ReactPropTypeLocations.prop
       );
     }
-    Constructor.propTypes = assign(
+    Constructor.propTypes = Object.assign(
       {},
       Constructor.propTypes,
       propTypes
@@ -710,7 +707,7 @@ var ReactClassMixin = {
   replaceState: function(newState, callback) {
     this.updater.enqueueReplaceState(this, newState);
     if (callback) {
-      this.updater.enqueueCallback(this, callback);
+      this.updater.enqueueCallback(this, callback, 'replaceState');
     }
   },
 
@@ -726,7 +723,7 @@ var ReactClassMixin = {
 };
 
 var ReactClassComponent = function() {};
-assign(
+Object.assign(
   ReactClassComponent.prototype,
   ReactComponent.prototype,
   ReactClassMixin
@@ -741,6 +738,7 @@ var ReactClass = {
 
   /**
    * Creates a composite component class given a class specification.
+   * See https://facebook.github.io/react/docs/top-level-api.html#react.createclass
    *
    * @param {object} spec Class specification (which must define `render`).
    * @return {function} Component constructor function.
@@ -796,10 +794,6 @@ var ReactClass = {
     Constructor.prototype.constructor = Constructor;
     Constructor.prototype.__reactAutoBindPairs = [];
 
-    injectedMixins.forEach(
-      mixSpecIntoComponent.bind(null, Constructor)
-    );
-
     mixSpecIntoComponent(Constructor, spec);
 
     // Initialize the defaultProps property after all mixins have been merged.
@@ -850,12 +844,6 @@ var ReactClass = {
     }
 
     return Constructor;
-  },
-
-  injection: {
-    injectMixin: function(mixin) {
-      injectedMixins.push(mixin);
-    },
   },
 
 };

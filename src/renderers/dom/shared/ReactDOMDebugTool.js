@@ -11,9 +11,9 @@
 
 'use strict';
 
+var ReactDOMNullInputValuePropDevtool = require('ReactDOMNullInputValuePropDevtool');
 var ReactDOMUnknownPropertyDevtool = require('ReactDOMUnknownPropertyDevtool');
-var ReactDOMSVGDeprecatedAttributeDevtool =
-  require('ReactDOMSVGDeprecatedAttributeDevtool');
+var ReactDebugTool = require('ReactDebugTool');
 
 var warning = require('warning');
 
@@ -29,10 +29,10 @@ function emitEvent(handlerFunctionName, arg1, arg2, arg3, arg4, arg5) {
         }
       } catch (e) {
         warning(
-          !handlerDoesThrowForEvent[handlerFunctionName],
+          handlerDoesThrowForEvent[handlerFunctionName],
           'exception thrown by devtool while handling %s: %s',
           handlerFunctionName,
-          e.message
+          e + '\n' + e.stack
         );
         handlerDoesThrowForEvent[handlerFunctionName] = true;
       }
@@ -42,9 +42,11 @@ function emitEvent(handlerFunctionName, arg1, arg2, arg3, arg4, arg5) {
 
 var ReactDOMDebugTool = {
   addDevtool(devtool) {
+    ReactDebugTool.addDevtool(devtool);
     eventHandlers.push(devtool);
   },
   removeDevtool(devtool) {
+    ReactDebugTool.removeDevtool(devtool);
     for (var i = 0; i < eventHandlers.length; i++) {
       if (eventHandlers[i] === devtool) {
         eventHandlers.splice(i, 1);
@@ -55,21 +57,18 @@ var ReactDOMDebugTool = {
   onCreateMarkupForProperty(name, value) {
     emitEvent('onCreateMarkupForProperty', name, value);
   },
-  onCreateMarkupForSVGAttribute(name, value) {
-    emitEvent('onCreateMarkupForSVGAttribute', name, value);
-  },
   onSetValueForProperty(node, name, value) {
     emitEvent('onSetValueForProperty', node, name, value);
-  },
-  onSetValueForSVGAttribute(node, name, value) {
-    emitEvent('onSetValueForSVGAttribute', node, name, value);
   },
   onDeleteValueForProperty(node, name) {
     emitEvent('onDeleteValueForProperty', node, name);
   },
+  onTestEvent() {
+    emitEvent('onTestEvent');
+  },
 };
 
 ReactDOMDebugTool.addDevtool(ReactDOMUnknownPropertyDevtool);
-ReactDOMDebugTool.addDevtool(ReactDOMSVGDeprecatedAttributeDevtool);
+ReactDOMDebugTool.addDevtool(ReactDOMNullInputValuePropDevtool);
 
 module.exports = ReactDOMDebugTool;

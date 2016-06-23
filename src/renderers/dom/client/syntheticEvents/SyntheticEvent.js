@@ -13,7 +13,6 @@
 
 var PooledClass = require('PooledClass');
 
-var assign = require('Object.assign');
 var emptyFunction = require('emptyFunction');
 var warning = require('warning');
 
@@ -111,7 +110,7 @@ function SyntheticEvent(dispatchConfig, targetInst, nativeEvent, nativeEventTarg
   return this;
 }
 
-assign(SyntheticEvent.prototype, {
+Object.assign(SyntheticEvent.prototype, {
 
   preventDefault: function() {
     this.defaultPrevented = true;
@@ -174,10 +173,21 @@ assign(SyntheticEvent.prototype, {
       this[shouldBeReleasedProperties[i]] = null;
     }
     if (__DEV__) {
-      var noop = require('emptyFunction');
-      Object.defineProperty(this, 'nativeEvent', getPooledWarningPropertyDefinition('nativeEvent', null));
-      Object.defineProperty(this, 'preventDefault', getPooledWarningPropertyDefinition('preventDefault', noop));
-      Object.defineProperty(this, 'stopPropagation', getPooledWarningPropertyDefinition('stopPropagation', noop));
+      Object.defineProperty(
+        this,
+        'nativeEvent',
+        getPooledWarningPropertyDefinition('nativeEvent', null)
+      );
+      Object.defineProperty(
+        this,
+        'preventDefault',
+        getPooledWarningPropertyDefinition('preventDefault', emptyFunction)
+      );
+      Object.defineProperty(
+        this,
+        'stopPropagation',
+        getPooledWarningPropertyDefinition('stopPropagation', emptyFunction)
+      );
     }
   },
 
@@ -229,11 +239,11 @@ SyntheticEvent.augmentClass = function(Class, Interface) {
   E.prototype = Super.prototype;
   var prototype = new E();
 
-  assign(prototype, Class.prototype);
+  Object.assign(prototype, Class.prototype);
   Class.prototype = prototype;
   Class.prototype.constructor = Class;
 
-  Class.Interface = assign({}, Super.Interface, Interface);
+  Class.Interface = Object.assign({}, Super.Interface, Interface);
   Class.augmentClass = Super.augmentClass;
 
   PooledClass.addPoolingTo(Class, PooledClass.fourArgumentPooler);

@@ -20,14 +20,23 @@ var createCacheKeyFunction = require('fbjs-scripts/jest/createCacheKeyFunction')
 // Use require.resolve to be resilient to file moves, npm updates, etc
 var pathToBabel = path.join(require.resolve('babel-core'), '..', 'package.json');
 var pathToModuleMap = require.resolve('fbjs/module-map');
-var pathToBabelPluginDev = require.resolve('fbjs-scripts/babel-6/dev-expression');
+var pathToBabelPluginDevWithCode = require.resolve('../error-codes/dev-expression-with-codes');
 var pathToBabelPluginModules = require.resolve('fbjs-scripts/babel-6/rewrite-modules');
 var pathToBabelrc = path.join(__dirname, '..', '..', '.babelrc');
 
 // TODO: make sure this stays in sync with gulpfile
 var babelOptions = {
   plugins: [
-    [babelPluginModules, { map: moduleMap }],
+    pathToBabelPluginDevWithCode, // this pass has to run before `rewrite-modules`
+    [babelPluginModules, {
+      map: Object.assign(
+        {},
+        moduleMap,
+        {
+          'object-assign': 'object-assign',
+        }
+      ),
+    }],
   ],
   retainLines: true,
 };
@@ -46,7 +55,10 @@ module.exports = {
     ) {
       return babel.transform(
         src,
-        Object.assign({filename: filePath}, babelOptions)
+        Object.assign(
+          {filename: path.relative(process.cwd(), filePath)},
+          babelOptions
+        )
       ).code;
     }
     return src;
@@ -57,7 +69,7 @@ module.exports = {
     pathToBabel,
     pathToBabelrc,
     pathToModuleMap,
-    pathToBabelPluginDev,
+    pathToBabelPluginDevWithCode,
     pathToBabelPluginModules,
   ]),
 };

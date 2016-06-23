@@ -11,7 +11,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    jsx: require('./grunt/config/jsx'),
     browserify: require('./grunt/config/browserify'),
     npm: require('./grunt/config/npm'),
     clean: [
@@ -57,13 +56,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('lint', ['eslint']);
 
+  grunt.registerTask('flow', require('./grunt/tasks/flow'));
+
   grunt.registerTask('delete-build-modules', function() {
     // Use gulp here.
     spawnGulp(['react:clean'], null, this.async());
   });
-
-  // Register jsx:normal and :release tasks.
-  grunt.registerMultiTask('jsx', require('./grunt/tasks/jsx'));
 
   // Our own browserify-based tasks to build a single JS file build.
   grunt.registerMultiTask('browserify', require('./grunt/tasks/browserify'));
@@ -77,6 +75,10 @@ module.exports = function(grunt) {
   var npmReactDOMTasks = require('./grunt/tasks/npm-react-dom');
   grunt.registerTask('npm-react-dom:release', npmReactDOMTasks.buildRelease);
   grunt.registerTask('npm-react-dom:pack', npmReactDOMTasks.packRelease);
+
+  var npmReactNativeTasks = require('./grunt/tasks/npm-react-native');
+  grunt.registerTask('npm-react-native:release', npmReactNativeTasks.buildRelease);
+  grunt.registerTask('npm-react-native:pack', npmReactNativeTasks.packRelease);
 
   var npmReactAddonsTasks = require('./grunt/tasks/npm-react-addons');
   grunt.registerTask('npm-react-addons:release', npmReactAddonsTasks.buildReleases);
@@ -131,6 +133,8 @@ module.exports = function(grunt) {
     'npm-react:pack',
     'npm-react-dom:release',
     'npm-react-dom:pack',
+    'npm-react-native:release',
+    'npm-react-native:pack',
     'npm-react-addons:release',
     'npm-react-addons:pack',
     'compare_size',

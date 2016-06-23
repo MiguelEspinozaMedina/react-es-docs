@@ -93,8 +93,8 @@ Think of all of the pieces of data in our example application. We have:
 Let's go through each one and figure out which one is state. Simply ask three questions about each piece of data:
 
   1. Is it passed in from a parent via props? If so, it probably isn't state.
-  2. Does it change over time? If not, it probably isn't state.
-  3. Can you compute it based on any other state or props in your component? If so, it's not state.
+  2. Does it remain unchanged over time? If so, it probably isn't state.
+  3. Can you compute it based on any other state or props in your component? If so, it isn't state.
 
 The original list of products is passed in as props, so that's not state. The search text and the checkbox seem to be state since they change over time and can't be computed from anything. And finally, the filtered list of products isn't state because it can be computed by combining the original list of products with the search text and value of the checkbox.
 
@@ -134,7 +134,7 @@ You can start seeing how your application will behave: set `filterText` to `"bal
 
 So far, we've built an app that renders correctly as a function of props and state flowing down the hierarchy. Now it's time to support data flowing the other way: the form components deep in the hierarchy need to update the state in `FilterableProductTable`.
 
-React makes this data flow explicit to make it easy to understand how your program works, but it does require a little more typing than traditional two-way data binding. React provides an add-on called `ReactLink` to make this pattern as convenient as two-way binding, but for the purpose of this post, we'll keep everything explicit.
+React makes this data flow explicit to make it easy to understand how your program works, but it does require a little more typing than traditional two-way data binding.
 
 If you try to type or check the box in the current version of the example, you'll see that React ignores your input. This is intentional, as we've set the `value` prop of the `input` to always be equal to the `state` passed in from `FilterableProductTable`.
 
